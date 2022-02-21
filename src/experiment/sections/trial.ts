@@ -3,7 +3,7 @@ import { JsPsych } from "jspsych";
 
 import { Position } from "../sequence/components/constants";
 import { ContextData } from "../sequence/components/context_trials";
-import { display, center_text, box_text, context_boxes } from "./components";
+import { display, center_text, box_text, context_boxes, center_error } from "./components";
 
 export function trial (jsPsych: JsPsych): object[] {
     // Utility functions
@@ -22,6 +22,8 @@ export function trial (jsPsych: JsPsych): object[] {
     function get_trial_data(): ContextData {
         const selection = get_choice();
         switch(selection) {
+            case null:
+                return null;
             case "e":
                 return jsPsych.timelineVariable('context_trials')[0];
             case "x":
@@ -41,6 +43,31 @@ export function trial (jsPsych: JsPsych): object[] {
 
     let trial_data: ContextData;
 
+    const init_trial_data = {
+        type: HtmlKeyboardResponsePlugin,
+        stimulus: () => display(
+            context_boxes(jsPsych.timelineVariable("top_color"), jsPsych.timelineVariable("bottom_color")),
+        ),
+        trial_duration: 0,
+        on_start: () => {
+            trial_data = get_trial_data();
+        }
+    }
+
+    const no_choice_feedback = {
+        type: HtmlKeyboardResponsePlugin,
+        stimulus: () => display(
+            context_boxes(jsPsych.timelineVariable("top_color"), jsPsych.timelineVariable("bottom_color")),
+            center_error("Too late!"),
+        ),
+        choices: "NO_KEYS",
+        trial_duration: 1500,
+        data: () => ({
+            context1: jsPsych.timelineVariable('context_trials')[0],
+            context2: jsPsych.timelineVariable('context_trials')[1],
+        })
+    }
+
     // Trial components
     const fixation = {
         type: HtmlKeyboardResponsePlugin,
@@ -51,7 +78,9 @@ export function trial (jsPsych: JsPsych): object[] {
         choices: "NO_KEYS",
         trial_duration: 500,
         on_start: () => {
-            trial_data = get_trial_data();
+            if(!trial_data) {
+                jsPsych.finishTrial();
+            }
         }
     }
 
@@ -82,7 +111,7 @@ export function trial (jsPsych: JsPsych): object[] {
         stimulus: "error",
         choices: ['j', 'l'],
         trial_duration: 1990,
-        on_start: (target: any) => {        
+        on_start: (target: any) => {   
             target.stimulus = display(
                 context_boxes(jsPsych.timelineVariable("top_color"), jsPsych.timelineVariable("bottom_color")),
                 box_text(trial_data.target, ["target", trial_data.position]),
@@ -119,6 +148,16 @@ export function trial (jsPsych: JsPsych): object[] {
         choices: "NO_KEYS",
         trial_duration: 1500,
     }
+
+    const if_trial = {
+        timeline: [fixation, context, distractor, target, feedback],
+        conditional_function: () => trial_data !== null,
+    }
+
+    const if_no_choice = {
+        timeline: [no_choice_feedback],
+        conditional_function: () => trial_data === null,
+    }
     
-    return [fixation, context, distractor, target, feedback];
+    return [init_trial_data, if_trial, if_no_choice];
 }

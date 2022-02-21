@@ -30,7 +30,7 @@ export function choice (jsPsych: JsPsych, version: number): object {
         type: HtmlKeyboardResponsePlugin,
         stimulus: stimulus,
         choices: choices,
-        trial_duration: 1500,
+        trial_duration: 2000,
         data: () => ({
             s_color: jsPsych.timelineVariable("s_key_color"),
             s_context: jsPsych.timelineVariable("s"),

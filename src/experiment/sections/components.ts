@@ -15,6 +15,10 @@ export function center_text(...args: string[]) {
     return `<div class='center-text'><p>${Array.from(args).join("</p><p>")}</p></div>`;
 }
 
+export function center_error(...args: string[]) {
+    return `<div class='center-text error'><p>${Array.from(args).join("</p><p>")}</p></div>`;
+}
+
 export const box_text = (text: string, classes: string[]|undefined) => {
     if (classes === undefined) {
         classes = []

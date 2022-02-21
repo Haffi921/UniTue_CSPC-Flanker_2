@@ -45,8 +45,6 @@ const timeline = [];
 //   timeline_variables: [{a: "Hello", b: "Goodbye"}]
 // })
 
-console.log(process.env.WP_MODE);
-
 const group = 0;
 
 const sequence = produce_sequence(group, "trial", 1);

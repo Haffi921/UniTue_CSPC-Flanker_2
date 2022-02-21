@@ -65,32 +65,37 @@ function css(dest_path) {
   };
 }
 
-function html(title, slug, dest_path, inject = true) {
+function html(title, root, path = "") {
   return function html() {
     return (
       src("assets/index.html")
-        .pipe(gulpIf(inject, replace(/(style.css|index.js)/g, slug + "/$1")))
+        .pipe(replace(/(style.css|index.js)/g, path + "/$1"))
         //.pipe(replace(/(style.css|index.js)/g, slug + "/$1"))
         .pipe(replace(/<title>\w+<\/title>/g, `<title>${title}</title>`))
-        .pipe(dest(dest_path))
+        .pipe(dest(root + "/" + path))
     );
   };
+}
+
+function createComponent(title, component, root, path = "") {
+  return parallel(
+    javascript(component, root + "/" + path),
+    css(root + "/" + path),
+    html(title, root, path)
+  );
 }
 
 function createComponents(title, entries, path) {
   const tasks = [];
   const entryList = Object.entries(entries);
   for (let [name, file] of entryList) {
-    const dest_path = entryList.length === 1 ? path : `${path}/${name}`;
-    tasks.push(
-      javascript(file, dest_path),
-      css(dest_path),
-      html(title, name, dest_path, entryList.length > 1)
-    );
+    // const dest_path = entryList.length === 1 ? path : `${path}/${name}`;
+    tasks.push(createComponent(title, file, path, name));
   }
   return parallel(...tasks);
 }
 
 module.exports = {
+  createComponent,
   createComponents,
 };

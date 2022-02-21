@@ -1,8 +1,0 @@
-{
-    "name": "CSPC Flanker Task 2",
-    "components": {
-        "batch_init": "batch_init.ts",
-        "group_select": "group_select.ts",
-        "experiment": "experiment"
-    }
-}

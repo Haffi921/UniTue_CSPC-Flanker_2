@@ -1,0 +1,22 @@
+{
+    "uuid": "89ba894f-62db-4d19-8be7-4d361817a6e4",
+    "title": "CSPC Flanker Task 2",
+    "dirName": "cspc_flanker_task_2",
+    "componentList": [
+        {
+            "uuid": "28d2f641-be90-4762-80ff-784d1531cfab",
+            "title": "batch_init",
+            "htmlFilePath": "batch_init/index.html"
+        },
+        {
+            "uuid": "6cb72178-339a-4477-9552-65e5bcc30978",
+            "title": "group_select",
+            "htmlFilePath": "group_select/index.html"
+        },
+        {
+            "uuid": "8f2750eb-c4cc-465b-820f-66b04b22c8a2",
+            "title": "experiment",
+            "htmlFilePath": "experiment/index.html"
+        }
+    ]
+}

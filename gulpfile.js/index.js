@@ -21,12 +21,7 @@ const sass = require("gulp-sass")(require("node-sass"));
 const tildeImporter = require("node-sass-tilde-importer");
 
 // Jatos
-const {
-  experiment_name,
-  slug,
-  jatos_file,
-  components,
-} = require("./jatos_study");
+const { experiment_title, slug, entries, jatos_config } = require("./jatos");
 
 const BUILD_DIR = "dist";
 
@@ -46,7 +41,7 @@ function javascript(name, file) {
               typescript(),
               babel({
                 babelHelpers: "bundled",
-                exclude: /node_modules/,
+                exclude: [/node_modules/],
               }),
               nodeResolve(),
               commonjs(),
@@ -83,7 +78,7 @@ function html(name) {
     return src("assets/index.html")
       .pipe(replace(/(style.css|index.js)/g, name + "/$1"))
       .pipe(
-        replace(/<title>\w+<\/title>/g, `<title>${experiment_name}</title>`)
+        replace(/<title>\w+<\/title>/g, `<title>${experiment_title}</title>`)
       )
       .pipe(dest(get_component_dest(name)));
   };
@@ -91,14 +86,14 @@ function html(name) {
 
 function createComponents() {
   const tasks = [];
-  for (let [name, file] of Object.entries(components)) {
+  for (let [name, file] of Object.entries(entries)) {
     tasks.push(javascript(name, file), html(name), css(name));
   }
   return parallel(...tasks);
 }
 
 function createJASFile() {
-  return gulpFile(`${slug}.jas`, jatos_file, { src: true }).pipe(
+  return gulpFile(`${slug}.jas`, jatos_config, { src: true }).pipe(
     dest(`${BUILD_DIR}/source`)
   );
 }

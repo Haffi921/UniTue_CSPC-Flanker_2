@@ -1,6 +1,3 @@
-// @ts-expect-error
-declare const jatos: any;
-
 function select_group() {
 	const group_counts = jatos.batchSession.get("condition-counter");
 	let min_count = Infinity;

@@ -1,6 +1,3 @@
-// @ts-expect-error
-declare const jatos: any;
-
 function CopyJsonInputToBatch() {
     let error_counter = 0;
     const data = jatos.componentJsonInput;

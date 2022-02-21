@@ -1,1 +1,0 @@
-!function(t){"function"==typeof define&&define.amd?define("groupSelect",t):t()}(function(){"use strict";jatos.onLoad(function(){jatos.studySessionData.group=function(){var t,n=jatos.batchSession.get("condition-counter"),o=1/0,e=[];for(t in n)n[t]<o?(o=n[t],e=[t]):n[t]===o&&e.push(t);return e[Math.floor(Math.random()*e.length)]}(),jatos.startNextComponent()})});

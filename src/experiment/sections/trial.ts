@@ -3,7 +3,7 @@ import { JsPsych } from "jspsych";
 
 import { Position } from "../sequence/components/constants";
 import { ContextData } from "../sequence/components/context_trials";
-import { display, center_text, box_text, context_boxes, center_error } from "./components";
+import { display, center_text, box_text, context_boxes, center_error } from "../../html_components";
 
 export function trial (jsPsych: JsPsych): object[] {
     // Utility functions

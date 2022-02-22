@@ -1,7 +1,7 @@
 import HtmlKeyboardResponsePlugin from "@jspsych/plugin-html-keyboard-response";
 import { JsPsych } from "jspsych";
 
-import { display, context_boxes, center_text, box_text, paragraphs } from "./components";
+import { display, context_boxes, center_text, center_error } from "../../html_components";
 
 export function choice (jsPsych: JsPsych, version: number): object {
 
@@ -39,5 +39,29 @@ export function choice (jsPsych: JsPsych, version: number): object {
         })
     }
 
-    return choice;
+    const no_choice_feedback = {
+        type: HtmlKeyboardResponsePlugin,
+        stimulus: () => display(
+            context_boxes(jsPsych.timelineVariable("top_color"), jsPsych.timelineVariable("bottom_color")),
+            center_error("Too late!"),
+        ),
+        choices: "NO_KEYS",
+        trial_duration: 1500,
+        data: () => ({
+            context1: jsPsych.timelineVariable('context_trials')[0],
+            context2: jsPsych.timelineVariable('context_trials')[1],
+        })
+    }
+
+    return function c() {
+        return {
+            timeline: [choice, c()],
+            conditional_function: function() {
+    
+            },
+            on_timeline_finish() {
+    
+            }
+        }
+    };
 }

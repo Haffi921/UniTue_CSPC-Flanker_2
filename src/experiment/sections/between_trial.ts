@@ -1,6 +1,6 @@
 import HtmlKeyboardResponsePlugin from "@jspsych/plugin-html-keyboard-response";
 
-import { display, center_text } from "./components";
+import { display, center_text } from "../../html_components";
 
 export const between_trial = {
     type: HtmlKeyboardResponsePlugin,

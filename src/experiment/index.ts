@@ -13,40 +13,18 @@ const jsPsych = initJsPsych();
 
 const timeline = [];
 
-// // Welcome screen
-// timeline.push({
-//   type: HtmlKeyboardResponsePlugin,
-//   stimulus: "<p>Welcome to CSPC_Flanker_2!<p/>",
-// });
+// TODO: Add informed consent, possible as another component
 
-// // Switch to fullscreen
-// timeline.push({
-//   type: FullscreenPlugin,
-//   fullscreen_mode: true,
-// });
+// Switch to fullscreen
+timeline.push({
+  type: FullscreenPlugin,
+  fullscreen_mode: true,
+});
 
-// const choice = {
-//   type: HtmlKeyboardResponsePlugin,
-//   stimulus: '<p>A or b?</p>',
-//   choices: ['a', 'b'],
-// }
-
-// const trial = {
-//   type: HtmlKeyboardResponsePlugin,
-//   on_start: (trial) => {
-//     //@ts-ignore
-//     const selection = jsPsych.data.getLastTrialData().trials[0].response;
-//     trial.stimulus = jsPsych.timelineVariable(selection);
-//   }
-// }
-
-// timeline.push({
-//   timeline: [choice, trial],
-//   timeline_variables: [{a: "Hello", b: "Goodbye"}]
-// })
-
+// Select group
 const group = 0;
 
+// Produce sequence
 const sequence = produce_sequence(group, "trial", 1);
 
 jsPsych.data.addProperties({

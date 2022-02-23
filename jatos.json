@@ -3,6 +3,7 @@
     "components": {
         "batch_init": "src/batch_init.ts",
         "group_select": "src/group_select.ts",
+        "informed_consent": "src/informedConsent.ts",
         "experiment": "src/experiment"
     }
 }

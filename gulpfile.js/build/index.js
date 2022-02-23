@@ -11,6 +11,10 @@ const BUILD_DIR = "dist";
 
 const component_dest = `${BUILD_DIR}/source/${slug}`;
 
+function additionalHTML() {
+  return src("html/*.html").pipe(dest(component_dest));
+}
+
 function createJASFile() {
   return gulpFile(`${slug}.jas`, jatos_config, { src: true }).pipe(
     dest(`${BUILD_DIR}/source`)
@@ -26,6 +30,7 @@ function zip() {
 module.exports = series(
   parallel(
     createComponents(experiment_title, entries, component_dest),
+    additionalHTML,
     createJASFile
   ),
   zip

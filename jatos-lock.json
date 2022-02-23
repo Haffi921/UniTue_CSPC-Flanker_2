@@ -14,6 +14,11 @@
             "htmlFilePath": "group_select/index.html"
         },
         {
+            "uuid": "34c3a447-990d-4a95-96ab-24bb2d87fbea",
+            "title": "informed_consent",
+            "htmlFilePath": "informed_consent/index.html"
+        },
+        {
             "uuid": "535764fd-cb32-4d0c-a4dc-fe2fd05498f0",
             "title": "experiment",
             "htmlFilePath": "experiment/index.html"

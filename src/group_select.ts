@@ -20,5 +20,5 @@ function select_group() {
 
 jatos.onLoad(function() {
     jatos.studySessionData.group = select_group();
-    jatos.startNextComponent();
+    jatos.startNextComponent(null, jatos.studySessionData.group);
 });

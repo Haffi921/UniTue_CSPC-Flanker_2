@@ -1,4 +1,4 @@
-import { Position, ContextColor, CongruencyString } from "./constants";
+import { Position, CongruencyString } from "./constants";
 
 export interface ContextData {
     // Function

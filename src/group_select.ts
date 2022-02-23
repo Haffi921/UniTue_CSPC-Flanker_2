@@ -9,13 +9,6 @@ function select_group(): number {
 	return selected_group;
 }
 
-// TODO: Add this to the end of experiment.
-// function record_group(group: number) {
-// 	const counter = jatos.batchSession.get("condition-counter");
-// 	++counter[group];
-// 	jatos.batchSession.set("condition-counter", counter).catch(record_group);
-// }
-
 jatos.onLoad(function () {
 	jatos.studySessionData.group = select_group();
 	jatos.startNextComponent(null, `Group ${jatos.studySessionData.group + 1}`);

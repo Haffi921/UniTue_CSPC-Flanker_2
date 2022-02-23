@@ -3,40 +3,47 @@ import { JsPsych } from "jspsych";
 
 import { display, context_boxes, center_text, center_error } from "../../html_components";
 
-export function choice (jsPsych: JsPsych, version: number): object {
+export function choice(jsPsych: JsPsych, version: number): object {
 
     let choices: string[], stimulus: () => string;
 
-    if (version) {
-        choices = ['s', 'f'];
-        stimulus = () => display(
-            context_boxes(jsPsych.timelineVariable("top_color"), jsPsych.timelineVariable("bottom_color")),
-            center_text(
-                `Please choose between <span class='${jsPsych.timelineVariable("s_key_color")}'>[S]</span> and <span class='${jsPsych.timelineVariable("f_key_color")}'>[F]</span>`
-            )
-        );
-    }
-    else {
-        choices = ['e', 'x'];
-        stimulus = () => display(
+    // TODO: Move To new repo
+    // if (version) {
+    //     choices = ['s', 'f'];
+    //     stimulus = () => display(
+    //         context_boxes(jsPsych.timelineVariable("top_color"), jsPsych.timelineVariable("bottom_color")),
+    //         center_text(
+    //             `Please choose between <span class='${jsPsych.timelineVariable("s_key_color")}'>[S]</span> and <span class='${jsPsych.timelineVariable("f_key_color")}'>[F]</span>`
+    //         )
+    //     );
+    // }
+    // else {
+    // choices = ['e', 'x'];
+    // stimulus = () => display(
+    //     context_boxes(jsPsych.timelineVariable("top_color"), jsPsych.timelineVariable("bottom_color")),
+    //     center_text(
+    //         `Please choose between <span class='${jsPsych.timelineVariable("top_color")}'>[E]</span> and <span class='${jsPsych.timelineVariable("bottom_color")}'>[X]</span>`
+    //     )
+    // );
+    // }
+
+    const choice = {
+        type: HtmlKeyboardResponsePlugin,
+        stimulus: () => display(
             context_boxes(jsPsych.timelineVariable("top_color"), jsPsych.timelineVariable("bottom_color")),
             center_text(
                 `Please choose between <span class='${jsPsych.timelineVariable("top_color")}'>[E]</span> and <span class='${jsPsych.timelineVariable("bottom_color")}'>[X]</span>`
             )
-        );
-    }
-
-    const choice = {
-        type: HtmlKeyboardResponsePlugin,
-        stimulus: stimulus,
-        choices: choices,
+        ),
+        choices: ['e', 'x'],
         trial_duration: 2000,
-        data: () => ({
-            s_color: jsPsych.timelineVariable("s_key_color"),
-            s_context: jsPsych.timelineVariable("s"),
-            f_color: jsPsych.timelineVariable("f_key_color"),
-            f_context: jsPsych.timelineVariable("f"),
-        })
+        // data: () => ({
+        // TODO: Move to new repo
+        // s_color: jsPsych.timelineVariable("s_key_color"),
+        // s_context: jsPsych.timelineVariable("s"),
+        // f_color: jsPsych.timelineVariable("f_key_color"),
+        // f_context: jsPsych.timelineVariable("f"),
+        // })
     }
 
     const no_choice_feedback = {
@@ -56,11 +63,11 @@ export function choice (jsPsych: JsPsych, version: number): object {
     return function c() {
         return {
             timeline: [choice, c()],
-            conditional_function: function() {
-    
+            conditional_function: function () {
+
             },
             on_timeline_finish() {
-    
+
             }
         }
     };

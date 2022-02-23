@@ -1,14 +1,15 @@
-import { CongruencyString, ContextColor, Version } from './constants';
+import { CongruencyString, ContextColor } from './constants';
 
 export interface ContextInfo {
     congruency_string: CongruencyString;
     color: ContextColor;
 }
 
+// TODO: Remove version from this file
 interface GroupContextInfo {
     upper: ContextInfo,
     lower: ContextInfo,
-    version: Version,
+    // version: Version,
 }
 
 export const GROUPS: GroupContextInfo[] = [
@@ -24,7 +25,7 @@ export const GROUPS: GroupContextInfo[] = [
             color: ContextColor.two,
         },
 
-        version: Version.one,
+        // version: Version.one,
     },
 
     // 2
@@ -33,13 +34,13 @@ export const GROUPS: GroupContextInfo[] = [
             congruency_string: CongruencyString.mostly_incongruent,
             color: ContextColor.one,
         },
-        
+
         lower: {
             congruency_string: CongruencyString.mostly_congruent,
             color: ContextColor.two,
         },
 
-        version: Version.one,
+        // version: Version.one,
     },
 
     // 3
@@ -48,13 +49,13 @@ export const GROUPS: GroupContextInfo[] = [
             congruency_string: CongruencyString.mostly_congruent,
             color: ContextColor.two,
         },
-        
+
         lower: {
             congruency_string: CongruencyString.mostly_incongruent,
             color: ContextColor.one,
         },
 
-        version: Version.one,
+        // version: Version.one,
     },
 
     // 4
@@ -63,72 +64,72 @@ export const GROUPS: GroupContextInfo[] = [
             congruency_string: CongruencyString.mostly_incongruent,
             color: ContextColor.two,
         },
-        
+
         lower: {
             congruency_string: CongruencyString.mostly_congruent,
             color: ContextColor.one,
         },
 
-        version: Version.one,
+        // version: Version.one,
     },
 
-    // 5
-    {
-        upper: {
-            congruency_string: CongruencyString.mostly_congruent,
-            color: ContextColor.one,
-        },
+    // // 5
+    // {
+    //     upper: {
+    //         congruency_string: CongruencyString.mostly_congruent,
+    //         color: ContextColor.one,
+    //     },
 
-        lower: {
-            congruency_string: CongruencyString.mostly_incongruent,
-            color: ContextColor.two,
-        },
+    //     lower: {
+    //         congruency_string: CongruencyString.mostly_incongruent,
+    //         color: ContextColor.two,
+    //     },
 
-        version: Version.two,
-    },
+    //     // version: Version.two,
+    // },
 
-    // 6
-    {
-        upper: {
-            congruency_string: CongruencyString.mostly_incongruent,
-            color: ContextColor.one,
-        },
-        
-        lower: {
-            congruency_string: CongruencyString.mostly_congruent,
-            color: ContextColor.two,
-        },
+    // // 6
+    // {
+    //     upper: {
+    //         congruency_string: CongruencyString.mostly_incongruent,
+    //         color: ContextColor.one,
+    //     },
 
-        version: Version.two,
-    },
+    //     lower: {
+    //         congruency_string: CongruencyString.mostly_congruent,
+    //         color: ContextColor.two,
+    //     },
 
-    // 7
-    {
-        upper: {
-            congruency_string: CongruencyString.mostly_congruent,
-            color: ContextColor.two,
-        },
-        
-        lower: {
-            congruency_string: CongruencyString.mostly_incongruent,
-            color: ContextColor.one,
-        },
+    //     // version: Version.two,
+    // },
 
-        version: Version.two,
-    },
+    // // 7
+    // {
+    //     upper: {
+    //         congruency_string: CongruencyString.mostly_congruent,
+    //         color: ContextColor.two,
+    //     },
 
-    // 8
-    {
-        upper: {
-            congruency_string: CongruencyString.mostly_incongruent,
-            color: ContextColor.two,
-        },
-        
-        lower: {
-            congruency_string: CongruencyString.mostly_congruent,
-            color: ContextColor.one,
-        },
+    //     lower: {
+    //         congruency_string: CongruencyString.mostly_incongruent,
+    //         color: ContextColor.one,
+    //     },
 
-        version: Version.two,
-    }
+    //     // version: Version.two,
+    // },
+
+    // // 8
+    // {
+    //     upper: {
+    //         congruency_string: CongruencyString.mostly_incongruent,
+    //         color: ContextColor.two,
+    //     },
+
+    //     lower: {
+    //         congruency_string: CongruencyString.mostly_congruent,
+    //         color: ContextColor.one,
+    //     },
+
+    //     // version: Version.two,
+    // }
 ];

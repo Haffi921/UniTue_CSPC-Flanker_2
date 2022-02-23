@@ -13,10 +13,11 @@ export enum ContextColor {
     two = "yellow",
 }
 
-export enum Version {
-    one,
-    two,
-}
+// TODO: Remove this entirely
+// export enum Version {
+//     one,
+//     two,
+// }
 
 export const CongruencyMatrix = {
     "Mostly Congruent": [32, 8, 32, 8, 5, 5, 5, 5],

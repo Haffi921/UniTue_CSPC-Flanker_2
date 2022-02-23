@@ -5,6 +5,7 @@ import FullscreenPlugin from "@jspsych/plugin-fullscreen";
 import { produce_sequence } from "./sequence/produce_sequence";
 import { GROUPS } from "./sequence/components/groups";
 
+import { instructions } from "./sections/instructions";
 import { trial } from "./sections/trial";
 import { between_trial } from "./sections/between_trial";
 import { post_trial } from "./sections/post_trial";
@@ -27,6 +28,8 @@ function run() {
     },
   });
 
+  // Get group
+  const group = jatos.studySessionData.group;
   const timeline = [];
 
   // Switch to fullscreen
@@ -35,14 +38,15 @@ function run() {
     fullscreen_mode: true,
   });
 
-  // Select group
-  const group = jatos.studySessionData.group;
-
-  const number_of_trials = 1;
+  // Instructions
+  timeline.push(
+    instructions(GROUPS[group].upper.color, GROUPS[group].lower.color)
+  );
 
   // Produce sequence
   const sequence = [produce_sequence(group, "practice", 1).slice(0, 20)];
 
+  const number_of_trials = 0;
   for (let i = 1; i <= number_of_trials; ++i)
     sequence.push(produce_sequence(group, "trial", i));
 
@@ -54,7 +58,9 @@ function run() {
     timeline.push(between_trial);
   }
 
-  timeline.push(post_trial(jsPsych));
+  timeline.push(
+    post_trial(jsPsych, GROUPS[group].upper.color, GROUPS[group].lower.color)
+  );
 
   jsPsych.data.addProperties({
     top_context: GROUPS[group].upper.congruency_string,

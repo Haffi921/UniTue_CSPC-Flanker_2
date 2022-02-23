@@ -43,14 +43,14 @@ function instructions(upperColor: string, lowerColor: string) {
       boxes,
       box_text("AA AA", ["top"]),
       center_text(
-        "An example is shown here above. Here you can select either A or F, using the [a] or [f] keys."
+        "An example is shown here above. Here you can select either A or F, using the [A] or [F] keys."
       ) + hint(true)
     ),
     display(
       boxes,
       box_text("SS SS", ["bottom"]),
       center_text(
-        "Here you can select either S or H, using the [s] or [h] keys."
+        "Here you can select either S or H, using the [S] or [H] keys."
       ) + hint(true)
     ),
     display(
@@ -163,12 +163,7 @@ export function post_trial(
 
   const iti = {
     type: HtmlKeyboardResponsePlugin,
-    stimulus: display(
-      context_boxes(
-        jsPsych.timelineVariable("top_color"),
-        jsPsych.timelineVariable("bottom_color")
-      )
-    ),
+    stimulus: display(boxes),
     choices: "NO_KEYS",
     trial_duration: 500,
   };

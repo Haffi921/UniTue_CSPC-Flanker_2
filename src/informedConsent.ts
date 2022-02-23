@@ -32,8 +32,6 @@ function run() {
     },
   ];
 
-  //https://jatos.psycho.uni-tuebingen.de/publix/4lJabSLnWVG?PROLIFIC_PID=6cb72178339a4477955265e5bcc30978
-
   jsPsych.run(timeline);
 }
 

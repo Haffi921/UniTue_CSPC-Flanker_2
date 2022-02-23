@@ -14,7 +14,7 @@ import {
 // Utility functions
 function removeStim() {
   const stim = document.getElementsByClassName("target")[0];
-  if (stim === null) {
+  if (stim !== undefined) {
     stim.removeChild(stim.firstChild);
   }
 }

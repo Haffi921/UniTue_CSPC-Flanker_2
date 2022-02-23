@@ -23,9 +23,19 @@ function run() {
       min_height: 625,
     },
     on_finish() {
-      record_group(group);
-      jatos.startNextComponent(jsPsych.data.get().csv(), "Finished");
+      jatos
+        .submitResultData(jsPsych.data.get().csv())
+        .then(record_group(group))
+        .then(() => jatos.endStudy());
     },
+  });
+
+  jsPsych.data.addProperties({
+    subject: jatos.studyResultId,
+    workerID: jatos.workerId,
+    prolificPID: jatos.urlQueryParameters.PROLIFIC_PID,
+    prolificSID: jatos.urlQueryParameters.STUDY_ID,
+    prolificSEID: jatos.urlQueryParameters.SESSION_ID,
   });
 
   // Get group

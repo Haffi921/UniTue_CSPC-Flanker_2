@@ -31,8 +31,6 @@ function serveComponent() {
 }
 
 function fileWatch() {
-  // const reload = () =>
-  //   series(serveComponent, src("dist/.server/*").pipe(connect.reload()));
   return watch(
     ["src/**/*", "style/**/*"],
     {

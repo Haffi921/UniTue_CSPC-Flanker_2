@@ -2,9 +2,7 @@
 const { parallel, src, dest } = require("gulp");
 const uglify = require("gulp-uglify");
 const replace = require("gulp-replace");
-const gulpExtReplace = require("gulp-ext-replace");
-const gulpIf = require("gulp-if");
-//const sourcemaps = require("gulp-sourcemaps");
+const rename = require("gulp-rename");
 
 // Rollup
 const rollup = require("gulp-better-rollup");
@@ -21,30 +19,26 @@ const tildeImporter = require("node-sass-tilde-importer");
 
 function javascript(file_path, dest_path) {
   return function javascript() {
-    return (
-      src(file_path)
-        //.pipe(sourcemaps.init())
-        .pipe(
-          rollup(
-            {
-              plugins: [
-                typescript(),
-                babel({
-                  babelHelpers: "bundled",
-                  exclude: [/node_modules/],
-                }),
-                nodeResolve(),
-                commonjs(),
-              ],
-            },
-            "umd"
-          )
+    return src(file_path)
+      .pipe(
+        rollup(
+          {
+            plugins: [
+              typescript(),
+              babel({
+                babelHelpers: "bundled",
+                exclude: [/node_modules/],
+              }),
+              nodeResolve(),
+              commonjs(),
+            ],
+          },
+          "umd"
         )
-        .pipe(uglify())
-        .pipe(gulpExtReplace(".js"))
-        //.pipe(sourcemaps.write())
-        .pipe(dest(dest_path))
-    );
+      )
+      .pipe(uglify())
+      .pipe(rename("index.js"))
+      .pipe(dest(dest_path));
   };
 }
 

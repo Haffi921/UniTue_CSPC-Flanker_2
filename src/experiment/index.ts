@@ -56,7 +56,7 @@ function run() {
   // Produce sequence
   const sequence = [produce_sequence(group, "practice", 1).slice(0, 20)];
 
-  const number_of_trials = 0;
+  const number_of_trials = 8;
   for (let i = 1; i <= number_of_trials; ++i)
     sequence.push(produce_sequence(group, "trial", i));
 

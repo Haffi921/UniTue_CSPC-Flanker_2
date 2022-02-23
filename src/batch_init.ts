@@ -1,6 +1,11 @@
+import { GROUPS } from "./experiment/sequence/components/groups";
+
 function CopyJsonInputToBatch() {
     let error_counter = 0;
-    const data = jatos.componentJsonInput;
+    const data = {
+        "condition-bool": Array(GROUPS.length).fill(true),
+        "condition-counter": Array(GROUPS.length).fill(0)
+    };
     const dataFields = Object.keys(data);
 
     function initBatchData(key, value) {

@@ -1,6 +1,6 @@
 function select_group(): number {
-	const groups = jatos.batchSession.get("condition-bool").reduce((open_groups, a, i) => {
-		if(a) open_groups.push(i);
+	const groups: number[] = jatos.batchSession.get("condition-bool").reduce((open_groups: number[], a: boolean, i: number) => {
+		if (a) open_groups.push(i);
 		return open_groups;
 	}, []);
 
@@ -9,7 +9,14 @@ function select_group(): number {
 	return selected_group;
 }
 
-jatos.onLoad(function() {
+// TODO: Add this to the end of experiment.
+// function record_group(group: number) {
+// 	const counter = jatos.batchSession.get("condition-counter");
+// 	++counter[group];
+// 	jatos.batchSession.set("condition-counter", counter).catch(record_group);
+// }
+
+jatos.onLoad(function () {
 	jatos.studySessionData.group = select_group();
-	jatos.startNextComponent(null, jatos.studySessionData.group);
+	jatos.startNextComponent(null, `Group ${jatos.studySessionData.group + 1}`);
 });

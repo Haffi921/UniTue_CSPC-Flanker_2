@@ -1,24 +1,15 @@
-function select_group() {
-	const group_counts = jatos.batchSession.get("condition-counter");
-	let min_count = Infinity;
-	let possible_groups = []
+function select_group(): number {
+	const groups = jatos.batchSession.get("condition-bool").reduce((open_groups, a, i) => {
+		if(a) open_groups.push(i);
+		return open_groups;
+	}, []);
 
-	for (let i in group_counts) {
-		if (group_counts[i] < min_count) {
-			min_count = group_counts[i];
-			possible_groups = [i];
-		}
-		else if (group_counts[i] === min_count) {
-			possible_groups.push(i);
-		}
-	}
-
-	let selected_group = possible_groups[Math.floor(Math.random() * possible_groups.length)];
+	let selected_group: number = groups[Math.floor(Math.random() * groups.length)];
 
 	return selected_group;
 }
 
 jatos.onLoad(function() {
-    jatos.studySessionData.group = select_group();
-    jatos.startNextComponent(null, jatos.studySessionData.group);
+	jatos.studySessionData.group = select_group();
+	jatos.startNextComponent(null, jatos.studySessionData.group);
 });

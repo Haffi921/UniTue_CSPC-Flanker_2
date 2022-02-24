@@ -1,25 +1,25 @@
 {
-    "uuid": "89ba894f-62db-4d19-8be7-4d361817a6e4",
-    "title": "CSPC Flanker Task 2",
-    "dirName": "cspc_flanker_task_2",
+    "uuid": "f8abd2c0-0da6-40b8-9799-aaa5a889b85a",
+    "title": "CSPC Flanker Task 2B",
+    "dirName": "cspc_flanker_task_2b",
     "componentList": [
         {
-            "uuid": "28d2f641-be90-4762-80ff-784d1531cfab",
+            "uuid": "56e0a8e6-7421-480c-977d-146fe5e8ad1a",
             "title": "batch_init",
             "htmlFilePath": "batch_init/index.html"
         },
         {
-            "uuid": "6cb72178-339a-4477-9552-65e5bcc30978",
+            "uuid": "012a06ce-1f8c-4ecc-9f98-5ce18c7b71c1",
             "title": "group_select",
             "htmlFilePath": "group_select/index.html"
         },
         {
-            "uuid": "34c3a447-990d-4a95-96ab-24bb2d87fbea",
+            "uuid": "31f8d4e2-418f-480e-b56f-2668e9826dc6",
             "title": "informed_consent",
             "htmlFilePath": "informed_consent/index.html"
         },
         {
-            "uuid": "535764fd-cb32-4d0c-a4dc-fe2fd05498f0",
+            "uuid": "2aa7f06e-fac9-48c5-b6ef-a1aa84e0ccb8",
             "title": "experiment",
             "htmlFilePath": "experiment/index.html"
         }

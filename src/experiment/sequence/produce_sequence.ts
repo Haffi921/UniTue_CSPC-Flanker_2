@@ -57,5 +57,25 @@ export function produce_sequence(
     };
   });
 
+  const key_context_sequence = randomRepetitionLockedSequencer([50, 50], 3);
+
+  sequence.map((trial: TrialData, i: number) => {
+    switch (key_context_sequence[i]) {
+      case 0:
+        trial.s_key_color = trial.top_color;
+        trial.s = Position.upper;
+        trial.f_key_color = trial.bottom_color;
+        trial.f = Position.lower;
+        break;
+      case 1:
+        trial.s_key_color = trial.bottom_color;
+        trial.s = Position.lower;
+        trial.f_key_color = trial.top_color;
+        trial.f = Position.upper;
+        break;
+    }
+    return trial;
+  });
+
   return sequence;
 }

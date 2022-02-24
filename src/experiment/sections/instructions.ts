@@ -139,24 +139,45 @@ export function instructions(
       center_text(
         "There are two boxes in which these letters will be shown<br>",
         "You will select whether the stimulus is to be displayed above or below. " +
-          `For this selection, please use the keys <span class="${upperColor}">[E]</span> and <span class="${lowerColor}">[X]</span> with your left hand.`
+          `For this selection, please use the keys [S] and [F] with your left hand.`
       ),
       hint(true)
     ),
     display(
       boxes,
       center_text(
-        `If you decide that the letters should be shown in the <b>upper</b> part of the screen, press <span class="${upperColor}">[E]</span>`
+        `Whether the [S] and [F] keys select the <span class="${upperColor}">upper</span> or <span class="${lowerColor}">lower</span> boxes changes from trial to trial`,
+        "You will see which key selects what box by their color"
       ),
-      box_text("SSSSS", ["top"]),
+      hint(true)
+    ),
+    display(
+      center_text(`You might get a trial where it looks like this:`),
       hint(true)
     ),
     display(
       boxes,
       center_text(
-        `If you decide that the letters should be shown in the <b>lower</b> part of the screen, press <span class="${lowerColor}">[X]</span>`
+        `Please choose between <span class='${upperColor}'>[S]</span> and <span class='${lowerColor}'>[F]</span>`
       ),
-      box_text("FFAFF", ["bottom"]),
+      hint(true)
+    ),
+    display(center_text(`or this...`), hint(true)),
+    display(
+      boxes,
+      center_text(
+        `Please choose between <span class='${lowerColor}'>[S]</span> and <span class='${upperColor}'>[F]</span>`
+      ),
+      hint(true)
+    ),
+    display(
+      center_text(
+        "Selecting the key that matches the color of a box will select that box",
+        `That is, <span class='${upperColor}'>[S]</span> for upper box, ` +
+          `<span class='${lowerColor}'>[S]</span> for lower box, ` +
+          `<span class='${upperColor}'>[F]</span> for upper box, ` +
+          `and <span class='${lowerColor}'>[F]</span> for lower box.`
+      ),
       hint(true)
     ),
     display(

@@ -1,7 +1,7 @@
 import HtmlKeyboardResponsePlugin from "@jspsych/plugin-html-keyboard-response";
 import { JsPsych } from "jspsych";
 
-// import { Position } from "../sequence/components/constants";
+import { Position } from "../sequence/components/constants";
 import { ContextData } from "../sequence/components/context_trials";
 import {
   display,
@@ -23,14 +23,9 @@ export function trial(jsPsych: JsPsych): object[] {
   let context_selection: string, trial_data: ContextData;
 
   function get_trial_data(): ContextData {
-    switch (context_selection) {
-      case "e":
-        return jsPsych.timelineVariable("context_trials", true)[0];
-      case "x":
-        return jsPsych.timelineVariable("context_trials", true)[1];
-      default:
-        return null;
-    }
+    const context =
+      jsPsych.timelineVariable(context_selection) === Position.upper ? 0 : 1;
+    return jsPsych.timelineVariable("context_trials")[context];
   }
 
   const selection = {
@@ -43,13 +38,13 @@ export function trial(jsPsych: JsPsych): object[] {
         ),
         center_text(
           `Please choose between <span class='${jsPsych.timelineVariable(
-            "top_color"
-          )}'>[E]</span> and <span class='${jsPsych.timelineVariable(
-            "bottom_color"
-          )}'>[X]</span>`
+            "s_key_color"
+          )}'>[S]</span> and <span class='${jsPsych.timelineVariable(
+            "f_key_color"
+          )}'>[F]</span>`
         )
       ),
-    choices: ["e", "x"],
+    choices: ["s", "f"],
     trial_duration: 1500,
     on_finish(data: any) {
       context_selection = data.response;
@@ -164,6 +159,11 @@ export function trial(jsPsych: JsPsych): object[] {
 
         context1: jsPsych.timelineVariable("context_trials")[0],
         context2: jsPsych.timelineVariable("context_trials")[1],
+
+        s_color: jsPsych.timelineVariable("s_key_color"),
+        s_context: jsPsych.timelineVariable("s"),
+        f_color: jsPsych.timelineVariable("f_key_color"),
+        f_context: jsPsych.timelineVariable("f"),
       };
     },
     on_load() {

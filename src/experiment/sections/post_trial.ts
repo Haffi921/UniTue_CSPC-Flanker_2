@@ -150,7 +150,7 @@ export function post_trial(
       position: jsPsych.timelineVariable("position"),
       type: jsPsych.timelineVariable("type"),
       context:
-        jsPsych.timelineVariable("type") === "top"
+        jsPsych.timelineVariable("position") === "top"
           ? group.upper.congruency_string
           : group.lower.congruency_string,
       trial: "post_trial",
@@ -169,7 +169,7 @@ export function post_trial(
       return display(
         boxes,
         box_text(jsPsych.timelineVariable("target").split(" ").join(answer), [
-          jsPsych.timelineVariable("context"),
+          jsPsych.timelineVariable("position"),
         ])
       );
     },

@@ -5,7 +5,7 @@ export interface ContextInfo {
   color: ContextColor;
 }
 
-interface GroupContextInfo {
+export interface GroupContextInfo {
   upper: ContextInfo;
   lower: ContextInfo;
 }

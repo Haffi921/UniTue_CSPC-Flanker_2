@@ -10,6 +10,8 @@ import {
   box_text,
 } from "../html_components";
 
+import { GroupContextInfo } from "../sequence/components/groups";
+
 function instructions(upperColor: string, lowerColor: string) {
   const continue_hint = "Please press the right arrow key to continue &#x27A1";
   const backtrack_hint = "&#x2B05 Left arrow key to go back";
@@ -69,61 +71,69 @@ function instructions(upperColor: string, lowerColor: string) {
 
 export function post_trial(
   jsPsych: JsPsych,
-  upperColor: string,
-  lowerColor: string
+  group: GroupContextInfo,
+  block: number
 ) {
   const values = [
     {
       center_text: "S\tor\tH?",
       target: "HH HH",
-      context: "top",
+      position: "top",
+      type: "inducer",
       keys: ["s", "h"],
     },
     {
       center_text: "S\tor\tH?",
       target: "SS SS",
-      context: "top",
+      position: "top",
+      type: "inducer",
       keys: ["s", "h"],
     },
     {
       center_text: "S\tor\tH?",
       target: "HH HH",
-      context: "bottom",
+      position: "bottom",
+      type: "inducer",
       keys: ["s", "h"],
     },
     {
       center_text: "S\tor\tH?",
       target: "SS SS",
-      context: "bottom",
+      position: "bottom",
+      type: "inducer",
       keys: ["s", "h"],
     },
     {
       center_text: "A\tor\tF?",
       target: "AA AA",
-      context: "top",
+      position: "top",
+      type: "transfer",
       keys: ["a", "f"],
     },
     {
       center_text: "A\tor\tF?",
       target: "FF FF",
-      context: "top",
+      position: "top",
+      type: "transfer",
       keys: ["a", "f"],
     },
     {
       center_text: "A\tor\tF?",
       target: "AA AA",
-      context: "bottom",
+      position: "bottom",
+      type: "transfer",
       keys: ["a", "f"],
     },
     {
       center_text: "A\tor\tF?",
       target: "FF FF",
-      context: "bottom",
+      position: "bottom",
+      type: "transfer",
       keys: ["a", "f"],
     },
   ];
 
-  const boxes = context_boxes(upperColor, lowerColor);
+  const boxes = context_boxes(group.upper.color, group.lower.color);
 
   const target = {
     type: HtmlKeyboardResponsePlugin,
@@ -132,13 +142,19 @@ export function post_trial(
         boxes,
         center_text(jsPsych.timelineVariable("center_text")),
         box_text(jsPsych.timelineVariable("target"), [
-          jsPsych.timelineVariable("context"),
+          jsPsych.timelineVariable("position"),
         ])
       ),
     data: () => ({
       target: jsPsych.timelineVariable("target"),
-      position: jsPsych.timelineVariable("context"),
+      position: jsPsych.timelineVariable("position"),
+      type: jsPsych.timelineVariable("type"),
+      context:
+        jsPsych.timelineVariable("type") === "top"
+          ? group.upper.congruency_string
+          : group.lower.congruency_string,
       trial: "post_trial",
+      block: block,
     }),
     choices: () => jsPsych.timelineVariable("keys"),
   };
@@ -170,7 +186,7 @@ export function post_trial(
 
   return {
     timeline: [
-      instructions(upperColor, lowerColor),
+      instructions(group.upper.color, group.lower.color),
       {
         timeline: [target, answer, iti],
         timeline_variables: values,

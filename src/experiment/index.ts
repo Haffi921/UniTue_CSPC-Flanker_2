@@ -56,8 +56,8 @@ function run() {
   // Produce sequence
   const sequence = [produce_sequence(group, "practice", 1).slice(0, 20)];
 
-  const number_of_trials = 8;
-  for (let i = 1; i <= number_of_trials; ++i)
+  const number_of_blocks = 8;
+  for (let i = 1; i <= number_of_blocks; ++i)
     sequence.push(produce_sequence(group, "trial", i));
 
   for (let seq of sequence) {
@@ -68,9 +68,7 @@ function run() {
     timeline.push(between_trial);
   }
 
-  timeline.push(
-    post_trial(jsPsych, GROUPS[group].upper.color, GROUPS[group].lower.color)
-  );
+  timeline.push(post_trial(jsPsych, GROUPS[group], number_of_blocks + 1));
 
   jsPsych.data.addProperties({
     top_context: GROUPS[group].upper.congruency_string,

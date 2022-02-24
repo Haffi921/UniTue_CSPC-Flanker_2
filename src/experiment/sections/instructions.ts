@@ -6,8 +6,12 @@ import {
   box_text,
   context_boxes,
 } from "../html_components";
+import { ContextColor } from "../sequence/components/constants";
 
-export function instructions(upperColor, lowerColor) {
+export function instructions(
+  upperColor: ContextColor,
+  lowerColor: ContextColor
+) {
   const continue_hint = "Please press the right arrow key to continue &#x27A1";
   const backtrack_hint = "&#x2B05 Left arrow key to go back";
 
@@ -135,14 +139,14 @@ export function instructions(upperColor, lowerColor) {
       center_text(
         "There are two boxes in which these letters will be shown<br>",
         "You will select whether the stimulus is to be displayed above or below. " +
-          "For this selection, please use the keys [E] and [X] with your left hand."
+          `For this selection, please use the keys <span class="${upperColor}">[E]</span> and <span class="${lowerColor}">[X]</span> with your left hand.`
       ),
       hint(true)
     ),
     display(
       boxes,
       center_text(
-        "If you decide that the letters should be shown in the <b>upper</b> part of the screen, press [E]"
+        `If you decide that the letters should be shown in the <b>upper</b> part of the screen, press <span class="${upperColor}">[E]</span>`
       ),
       box_text("SSSSS", ["top"]),
       hint(true)
@@ -150,7 +154,7 @@ export function instructions(upperColor, lowerColor) {
     display(
       boxes,
       center_text(
-        "If you decide that the letters should be shown in the <b>lower</b> part of the screen, press [X]"
+        `If you decide that the letters should be shown in the <b>lower</b> part of the screen, press <span class="${lowerColor}">[X]</span>`
       ),
       box_text("FFAFF", ["bottom"]),
       hint(true)

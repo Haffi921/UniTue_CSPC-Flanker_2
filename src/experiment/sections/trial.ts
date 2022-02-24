@@ -30,9 +30,6 @@ export function trial(jsPsych: JsPsych): object[] {
         return jsPsych.timelineVariable("context_trials", true)[1];
       default:
         return null;
-      // TODO: Move to new repo
-      // const context = jsPsych.timelineVariable(selection) === Position.upper ? 0 : 1;
-      // return jsPsych.timelineVariable('context_trials')[context];
     }
   }
 
@@ -73,10 +70,6 @@ export function trial(jsPsych: JsPsych): object[] {
           ),
         choices: "NO_KEYS",
         trial_duration: 1500,
-        data: () => ({
-          context1: jsPsych.timelineVariable("context_trials")[0],
-          context2: jsPsych.timelineVariable("context_trials")[1],
-        }),
       },
     ],
     conditional_function() {
@@ -168,6 +161,9 @@ export function trial(jsPsych: JsPsych): object[] {
         block_type: trial_data.block_type,
         block_nr: trial_data.block_nr,
         trial_nr: trial_data.context_trial_nr,
+
+        context1: jsPsych.timelineVariable("context_trials")[0],
+        context2: jsPsych.timelineVariable("context_trials")[1],
       };
     },
     on_load() {

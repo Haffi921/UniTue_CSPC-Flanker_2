@@ -30,14 +30,6 @@ function run() {
     },
   });
 
-  jsPsych.data.addProperties({
-    subject: jatos.studyResultId,
-    workerID: jatos.workerId,
-    prolificPID: jatos.urlQueryParameters.PROLIFIC_PID,
-    prolificSID: jatos.urlQueryParameters.STUDY_ID,
-    prolificSEID: jatos.urlQueryParameters.SESSION_ID,
-  });
-
   // Get group
   const group = jatos.studySessionData.group;
   const timeline = [];
@@ -71,6 +63,12 @@ function run() {
   timeline.push(post_trial(jsPsych, GROUPS[group], number_of_blocks + 1));
 
   jsPsych.data.addProperties({
+    subject: jatos.studyResultId,
+    workerID: jatos.workerId,
+    prolificPID: jatos.urlQueryParameters.PROLIFIC_PID,
+    prolificSID: jatos.urlQueryParameters.STUDY_ID,
+    prolificSEID: jatos.urlQueryParameters.SESSION_ID,
+
     top_context: GROUPS[group].upper.congruency_string,
     top_context_color: GROUPS[group].upper.color,
     bottom_context: GROUPS[group].lower.congruency_string,

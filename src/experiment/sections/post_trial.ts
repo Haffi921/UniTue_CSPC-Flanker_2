@@ -71,7 +71,8 @@ function instructions(upperColor: string, lowerColor: string) {
 
 export function post_trial(
   jsPsych: JsPsych,
-  group: GroupContextInfo,
+  groupinfo: GroupContextInfo,
+  group: number,
   block: number
 ) {
   const values = [
@@ -133,7 +134,7 @@ export function post_trial(
     },
   ];
 
-  const boxes = context_boxes(group.upper.color, group.lower.color);
+  const boxes = context_boxes(groupinfo.upper.color, groupinfo.lower.color);
 
   const target = {
     type: HtmlKeyboardResponsePlugin,
@@ -151,10 +152,11 @@ export function post_trial(
       type: jsPsych.timelineVariable("type"),
       context:
         jsPsych.timelineVariable("position") === "top"
-          ? group.upper.congruency_string
-          : group.lower.congruency_string,
-      trial: "post_trial",
-      block: block,
+          ? groupinfo.upper.congruency_string
+          : groupinfo.lower.congruency_string,
+      group_nr: group,
+      block_type: "post_trial",
+      block_nr: block,
     }),
     choices: () => jsPsych.timelineVariable("keys"),
   };
@@ -186,7 +188,7 @@ export function post_trial(
 
   return {
     timeline: [
-      instructions(group.upper.color, group.lower.color),
+      instructions(groupinfo.upper.color, groupinfo.lower.color),
       {
         timeline: [target, answer, iti],
         timeline_variables: values,

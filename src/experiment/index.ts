@@ -60,7 +60,9 @@ function run() {
     timeline.push(between_trial);
   }
 
-  timeline.push(post_trial(jsPsych, GROUPS[group], number_of_blocks + 1));
+  timeline.push(
+    post_trial(jsPsych, GROUPS[group], group, number_of_blocks + 1)
+  );
 
   jsPsych.data.addProperties({
     subject: jatos.studyResultId,

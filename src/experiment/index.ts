@@ -57,7 +57,7 @@ function run() {
       timeline: trial(jsPsych),
       timeline_variables: seq,
     });
-    timeline.push(between_trial);
+    timeline.push(between_trial(jsPsych));
   }
 
   timeline.push(

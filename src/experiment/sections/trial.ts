@@ -20,13 +20,23 @@ function removeStim() {
 }
 
 export function trial(jsPsych: JsPsych): object[] {
-  let context_selection: string, trial_data: ContextData;
+  let context_selection: string,
+    trial_data: ContextData,
+    context_A = 0,
+    context_B = 0,
+    switches = 0,
+    last_selection = undefined;
 
   function get_trial_data(): ContextData {
+    if (context_selection !== last_selection && last_selection !== undefined)
+      ++switches;
+    last_selection = context_selection;
     switch (context_selection) {
       case "e":
+        ++context_A;
         return jsPsych.timelineVariable("context_trials", true)[0];
       case "x":
+        ++context_B;
         return jsPsych.timelineVariable("context_trials", true)[1];
       default:
         return null;
@@ -164,6 +174,11 @@ export function trial(jsPsych: JsPsych): object[] {
 
         context1: jsPsych.timelineVariable("context_trials")[0],
         context2: jsPsych.timelineVariable("context_trials")[1],
+
+        upper_context_selected: context_A,
+        lower_context_selected: context_B,
+
+        context_switces: switches,
       };
     },
     on_load() {

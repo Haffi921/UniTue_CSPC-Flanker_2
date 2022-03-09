@@ -161,7 +161,8 @@ export function instructions(
     ),
     display(
       center_text(
-        "Decide spontaneously and do not use any particular strategy. Please try to choose both positions about the same number of times."
+        "<b>IMPORTANT:</b> Decide spontaneously and do not use any particular strategy.",
+        "Please try to choose both positions about the same number of times."
       ),
       hint(true)
     ),
